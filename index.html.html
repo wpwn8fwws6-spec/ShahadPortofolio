@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shahad Alshaghar — Clinical Laboratory Sciences</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F3F1EC;
+    --paper-raised:#FFFFFF;
+    --ink:#1C201F;
+    --ink-soft:#4B534F;
+    --teal:#0D3B36;
+    --teal-deep:#082623;
+    --amber:#B9873F;
+    --sage:#7C9A8C;
+    --line:#D9D4C8;
+    --max:1080px;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'IBM Plex Sans', sans-serif;
+    font-size:16px;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  h1,h2,h3{
+    font-family:'Fraunces', serif;
+    font-weight:500;
+    margin:0;
+    color:var(--teal-deep);
+  }
+
+  .mono{
+    font-family:'IBM Plex Mono', monospace;
+    letter-spacing:0.04em;
+  }
+
+  a{color:var(--teal); text-decoration:none;}
+  a:hover{color:var(--amber);}
+
+  :focus-visible{
+    outline:2px solid var(--amber);
+    outline-offset:3px;
+  }
+
+  /* ---------- Specimen tag / eyebrow ---------- */
+  .tag{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px;
+    letter-spacing:0.12em;
+    text-transform:uppercase;
+    color:var(--teal);
+    border:1px solid var(--teal);
+    padding:4px 10px 4px 8px;
+    border-radius:2px;
+    background:rgba(13,59,54,0.04);
+  }
+  .tag::before{
+    content:"";
+    width:6px; height:6px;
+    background:var(--amber);
+    border-radius:50%;
+    flex-shrink:0;
+  }
+
+  /* ---------- Layout shells ---------- */
+  .wrap{
+    max-width:var(--max);
+    margin:0 auto;
+    padding:0 32px;
+  }
+  section{padding:88px 0;}
+  section + section{border-top:1px solid var(--line);}
+
+  /* ---------- Header / nav ---------- */
+  header{
+    position:sticky; top:0; z-index:50;
+    background:rgba(243,241,236,0.88);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav-inner{
+    max-width:var(--max);
+    margin:0 auto;
+    padding:18px 32px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+  }
+  .nav-name{
+    font-family:'Fraunces', serif;
+    font-size:18px;
+    color:var(--teal-deep);
+  }
+  nav ul{
+    list-style:none;
+    display:flex;
+    gap:28px;
+    margin:0; padding:0;
+    font-size:14px;
+  }
+  nav a{color:var(--ink-soft);}
+  nav a:hover{color:var(--teal);}
+
+  /* ---------- Hero ---------- */
+  .hero{
+    padding:120px 0 90px;
+    position:relative;
+  }
+  .hero-grid{
+    display:grid;
+    grid-template-columns:1fr auto;
+    gap:40px;
+    align-items:end;
+  }
+  .hero h1{
+    font-size:clamp(42px, 6vw, 68px);
+    line-height:1.05;
+    margin-top:18px;
+  }
+  .hero .role{
+    font-size:clamp(18px,2.2vw,22px);
+    color:var(--ink-soft);
+    margin-top:14px;
+    max-width:620px;
+  }
+  .hero-panel{
+    justify-self:end;
+    text-align:right;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:13px;
+    color:var(--ink-soft);
+    border-left:1px solid var(--line);
+    padding-left:24px;
+    line-height:1.9;
+  }
+  .hero-panel div span{color:var(--teal); font-weight:500;}
+
+  .hero-rule{
+    margin-top:56px;
+    height:1px;
+    background:repeating-linear-gradient(90deg, var(--teal) 0 8px, transparent 8px 14px);
+    opacity:0.6;
+  }
+
+  /* ---------- Section headers ---------- */
+  .sec-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:baseline;
+    flex-wrap:wrap;
+    gap:12px;
+    margin-bottom:44px;
+  }
+  .sec-head h2{font-size:30px;}
+
+  /* ---------- Summary ---------- */
+  .summary p{
+    font-size:19px;
+    max-width:760px;
+    color:var(--ink-soft);
+  }
+  .summary p strong{color:var(--ink); font-weight:600;}
+
+  /* ---------- Experience: lab-report style rows ---------- */
+  .report{
+    border:1px solid var(--line);
+    background:var(--paper-raised);
+    border-radius:3px;
+    margin-bottom:18px;
+    overflow:hidden;
+  }
+  .report-head{
+    display:grid;
+    grid-template-columns:150px 1fr auto;
+    gap:20px;
+    align-items:center;
+    padding:20px 24px;
+    border-bottom:1px solid var(--line);
+    background:rgba(13,59,54,0.03);
+  }
+  .report-head .ref{font-family:'IBM Plex Mono', monospace; font-size:12px; color:var(--amber); letter-spacing:0.06em;}
+  .report-head h3{font-size:19px; font-weight:600; font-family:'IBM Plex Sans',sans-serif; color:var(--ink);}
+  .report-head .date{font-family:'IBM Plex Mono', monospace; font-size:12px; color:var(--ink-soft); white-space:nowrap;}
+  .report-body{padding:20px 24px; color:var(--ink-soft); font-size:15.5px;}
+  .report-body .org{color:var(--teal); font-weight:500; display:block; margin-bottom:8px; font-size:14px;}
+
+  @media (max-width:640px){
+    .report-head{grid-template-columns:1fr; row-gap:6px;}
+  }
+
+  /* ---------- Two-column: education + achievements ---------- */
+  .split{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:48px;
+  }
+  @media (max-width:820px){ .split{grid-template-columns:1fr;} }
+
+  .edu-block{border-left:2px solid var(--teal); padding-left:20px;}
+  .edu-block h3{font-size:20px; margin-bottom:6px;}
+  .edu-block .meta{font-family:'IBM Plex Mono',monospace; font-size:12.5px; color:var(--amber); margin-bottom:14px; display:block;}
+  .edu-block p{color:var(--ink-soft); font-size:15px; margin:6px 0;}
+
+  .achieve-list{list-style:none; margin:0; padding:0;}
+  .achieve-list li{
+    padding:16px 0;
+    border-bottom:1px solid var(--line);
+    font-size:15px;
+    color:var(--ink-soft);
+    display:flex;
+    gap:14px;
+  }
+  .achieve-list li:last-child{border-bottom:none;}
+  .achieve-list .mark{color:var(--amber); font-family:'IBM Plex Mono',monospace; flex-shrink:0;}
+
+  /* ---------- Skills ---------- */
+  .skill-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fill, minmax(220px,1fr));
+    gap:14px;
+  }
+  .skill-card{
+    border:1px solid var(--line);
+    background:var(--paper-raised);
+    border-radius:3px;
+    padding:16px 18px;
+    font-size:14.5px;
+    color:var(--ink-soft);
+    position:relative;
+  }
+  .skill-card::before{
+    content:"";
+    position:absolute; left:0; top:0; bottom:0;
+    width:3px; background:var(--sage);
+  }
+
+  /* ---------- Certificates + languages ---------- */
+  .cert-row{
+    display:flex;
+    flex-wrap:wrap;
+    gap:12px;
+  }
+  .cert-chip{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12.5px;
+    border:1px solid var(--teal);
+    color:var(--teal);
+    padding:8px 14px;
+    border-radius:20px;
+    background:rgba(13,59,54,0.03);
+  }
+
+  .lang-row{display:flex; gap:40px; margin-top:36px;}
+  .lang-item .level{font-family:'IBM Plex Mono',monospace; font-size:12px; color:var(--amber); text-transform:uppercase; letter-spacing:0.08em;}
+  .lang-item h3{font-size:18px; margin-top:4px;}
+
+  /* ---------- Contact / footer ---------- */
+  footer{
+    background:var(--teal-deep);
+    color:#EDEAE0;
+    padding:80px 0 40px;
+  }
+  footer h2{color:#fff; font-size:32px;}
+  footer .lead{color:#C9D6D1; font-size:17px; max-width:520px; margin-top:12px;}
+  .contact-grid{
+    margin-top:44px;
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+    gap:24px;
+  }
+  .contact-item{border-top:1px solid rgba(255,255,255,0.2); padding-top:14px;}
+  .contact-item .label{font-family:'IBM Plex Mono',monospace; font-size:11.5px; text-transform:uppercase; letter-spacing:0.1em; color:#8FADA3;}
+  .contact-item a, .contact-item span{color:#EDEAE0; font-size:15.5px; display:block; margin-top:6px;}
+  .contact-item a:hover{color:var(--amber);}
+
+  .foot-bottom{
+    margin-top:60px;
+    padding-top:24px;
+    border-top:1px solid rgba(255,255,255,0.15);
+    font-family:'IBM Plex Mono',monospace;
+    font-size:12px;
+    color:#8FADA3;
+    display:flex;
+    justify-content:space-between;
+    flex-wrap:wrap;
+    gap:10px;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="nav-inner">
+    <div class="nav-name">S. Alshaghar</div>
+    <nav>
+      <ul>
+        <li><a href="#summary">Profile</a></li>
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#education">Education</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <div class="hero-grid">
+      <div>
+        <span class="tag">Clinical Laboratory Sciences</span>
+        <h1>Shahad Faihan<br>Alshaghar</h1>
+        <p class="role">A healthcare professional who moves fluidly between the bench and the bigger picture — trained in clinical diagnostics, grounded in research methodology, and driven by a genuine curiosity about how data becomes decisions. Comfortable across hospital, corporate, and research settings alike.</p>
+      </div>
+      <div class="hero-panel">
+        <div>LOCATION <span>Riyadh, Saudi Arabia</span></div>
+        <div>LICENSE <span>SCFHS — Active</span></div>
+        <div>STATUS <span>Open to opportunities</span></div>
+      </div>
+    </div>
+    <div class="hero-rule"></div>
+  </div>
+</section>
+
+<section id="summary">
+  <div class="wrap summary">
+    <div class="sec-head">
+      <h2>Profile</h2>
+      <span class="tag">Summary</span>
+    </div>
+    <p><strong>Clinical Laboratory Sciences graduate</strong> with clinical internship experience spanning the core diagnostic disciplines of a hospital laboratory. Skilled in specimen handling, quality control and accurate result reporting, with a genuine interest in continuously developing professional competencies and contributing to high-quality laboratory services.</p>
+  </div>
+</section>
+
+<section id="experience">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2>Experience</h2>
+      <span class="tag">Field Record</span>
+    </div>
+
+    <div class="report">
+      <div class="report-head">
+        <span class="ref mono">REF · CLS-INT</span>
+        <h3>Clinical Laboratory Sciences Intern</h3>
+        <span class="date mono">2026</span>
+      </div>
+      <div class="report-body">
+        <span class="org">King Abdullah bin Abdulaziz University Hospital · Riyadh, KSA</span>
+        Completed a full clinical internship with hands-on experience across hospital laboratory sections — Hematology, Blood Bank &amp; Transfusion Medicine, Clinical Chemistry, POCT, Serology, Molecular Diagnostics, Immunology and Microbiology.
+      </div>
+    </div>
+
+    <div class="report">
+      <div class="report-head">
+        <span class="ref mono">REF · BB-VOL</span>
+        <h3>Blood Bank Volunteer</h3>
+        <span class="date mono">Aug 2024</span>
+      </div>
+      <div class="report-body">
+        <span class="org">King Faisal Specialist Hospital &amp; Research Centre (KFSHRC) · Riyadh, KSA</span>
+        Completed a specialized Blood Bank program covering blood donation workflow, blood component processing and transfusion principles in accordance with clinical standards.
+      </div>
+    </div>
+
+    <div class="report">
+      <div class="report-head">
+        <span class="ref mono">REF · SRCA-VOL</span>
+        <h3>Volunteer, Emergency &amp; First Aid</h3>
+        <span class="date mono">Jul 2024</span>
+      </div>
+      <div class="report-body">
+        <span class="org">Saudi Red Crescent Authority · Riyadh, KSA</span>
+        Supported emergency services and first aid activities as part of a coordinated field team.
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="education">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2>Education &amp; Achievements</h2>
+      <span class="tag">Credentials</span>
+    </div>
+    <div class="split">
+      <div class="edu-block">
+        <h3>B.Sc. Clinical Laboratory Sciences</h3>
+        <span class="meta">Shaqra University · 2024</span>
+        <p>Graduation research: <em>Exploring Blood Donation and Regular Donors at Shaqra University — Rates, Health Impacts, and Motivating Factors</em>, a cross-sectional study.</p>
+        <p>Awarded 2nd Place at the Shaqra University Scientific Research and Graduation Projects Forum.</p>
+      </div>
+      <ul class="achieve-list">
+        <li><span class="mark mono">01</span> Second Place, Shaqra University Scientific Research &amp; Graduation Projects Forum.</li>
+        <li><span class="mark mono">02</span> Published research: <em>Determining Public Awareness of the Roles of Dermatologists and Plastic Surgeons — A Survey-Based Study in Saudi Arabia.</em></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2>Skills &amp; Expertise</h2>
+      <span class="tag">Panel</span>
+    </div>
+    <div class="skill-grid">
+      <div class="skill-card">Hematology</div>
+      <div class="skill-card">Clinical Chemistry</div>
+      <div class="skill-card">Blood Bank &amp; Transfusion Medicine</div>
+      <div class="skill-card">Microbiology</div>
+      <div class="skill-card">Immunology &amp; Serology</div>
+      <div class="skill-card">Molecular Diagnostics</div>
+      <div class="skill-card">POCT &amp; Blood Gas</div>
+      <div class="skill-card">Specimen Collection &amp; Processing</div>
+      <div class="skill-card">Quality Control (QC)</div>
+      <div class="skill-card">Laboratory Safety Standards</div>
+      <div class="skill-card">Verbal &amp; Written Communication</div>
+      <div class="skill-card">Fast Technical Adaptability</div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="sec-head">
+      <h2>Certificates</h2>
+      <span class="tag">Verified</span>
+    </div>
+    <div class="cert-row">
+      <span class="cert-chip">Saudi Commission for Health Specialties (SCFHS)</span>
+      <span class="cert-chip">College of American Pathologists (CAP) Courses</span>
+      <span class="cert-chip">BLS</span>
+      <span class="cert-chip">Fundamentals of Clinical Research — KAIMRC</span>
+      <span class="cert-chip">ISO 9001 Quality System</span>
+    </div>
+
+    <div class="lang-row">
+      <div class="lang-item">
+        <span class="level mono">Native</span>
+        <h3>Arabic</h3>
+      </div>
+      <div class="lang-item">
+        <span class="level mono">Professional</span>
+        <h3>English</h3>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer id="contact">
+  <div class="wrap">
+    <span class="tag" style="border-color:#8FADA3; color:#EDEAE0;">Get in touch</span>
+    <h2 style="margin-top:16px;">Let's work together.</h2>
+    <p class="lead">Open to laboratory, clinical and healthcare-adjacent roles across Riyadh and beyond. Reach out directly using the details below.</p>
+
+    <div class="contact-grid">
+      <div class="contact-item">
+        <span class="label">Email</span>
+        <a href="mailto:ShahadAlshaghar@gmail.com">ShahadAlshaghar@gmail.com</a>
+      </div>
+      <div class="contact-item">
+        <span class="label">Phone</span>
+        <span>+966 55 797 2135</span>
+      </div>
+      <div class="contact-item">
+        <span class="label">Location</span>
+        <span>Riyadh, Saudi Arabia</span>
+      </div>
+      <div class="contact-item">
+        <span class="label">License</span>
+        <span>SCFHS — Active</span>
+      </div>
+    </div>
+
+    <div class="foot-bottom">
+      <span>© 2026 Shahad Faihan Alshaghar</span>
+      <span>Clinical Laboratory Sciences · Riyadh, KSA</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
